@@ -1,5 +1,6 @@
 package com.mrbbot.magicalbooks.item;
 
+import com.mrbbot.magicalbooks.creativetab.CreativeTabMagicalBooks;
 import com.mrbbot.magicalbooks.reference.Reference;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -17,6 +18,7 @@ public class ItemMagicalBooks extends Item {
     {
         super();
         this.maxStackSize = 1;
+        setCreativeTab(CreativeTabMagicalBooks.MAGICALBOOKS_TAB);
     }
 
     protected void setLore(String... lore) {
