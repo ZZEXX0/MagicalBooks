@@ -1,0 +1,21 @@
+[
+{
+  "modid": "MagicalBooks",
+  "name": "Magical Books",
+  "description": "A selection of Magical Books!",
+  "version": "1.0",
+  "mcversion": "1.7.10",
+  "url": "",
+  "updateUrl": "",
+  "authorList": [
+    "mrbbot"
+  ],
+  "credits": "",
+  "logoFile": "",
+  "screenshots": [
+  ],
+  "parent":"",
+  "dependencies": [
+  ]
+}
+]
