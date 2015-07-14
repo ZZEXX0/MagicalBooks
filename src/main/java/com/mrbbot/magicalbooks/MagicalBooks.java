@@ -1,5 +1,6 @@
 package com.mrbbot.magicalbooks;
 
+import com.mrbbot.magicalbooks.init.ModItems;
 import com.mrbbot.magicalbooks.proxy.IProxy;
 import com.mrbbot.magicalbooks.reference.Reference;
 import com.mrbbot.magicalbooks.utility.LogHelper;
@@ -20,6 +21,8 @@ public class MagicalBooks {
 
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
+        ModItems.init();
+
         LogHelper.info("Pre-Initialization Complete!");
     }
 
