@@ -8,3 +8,6 @@ item.magicalbooks:activationStick.name=Rod of Activation
 
 # Blocks
 tile.magicalbooks:blockPedestal.name=Pedestal
+
+# NEI
+gui.nei.magicalbooks:pedestalInfusion=Pedestal Infusion

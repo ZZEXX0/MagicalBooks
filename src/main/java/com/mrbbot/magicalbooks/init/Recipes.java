@@ -16,7 +16,8 @@ public class Recipes {
         GameRegistry.addShapelessRecipe(ModItems.fireActivationStick, ModItems.itemActivationStick);
 
         InfusionRecipes.addInfusion(new ItemStack(ModItems.bookJump), new ItemStack(Items.book), new ItemStack(Items.nether_star), new ItemStack(Items.feather));
-        InfusionRecipes.addInfusion(new ItemStack(Blocks.crafting_table), new ItemStack(Items.iron_ingot), new ItemStack(Blocks.planks), new ItemStack(Blocks.planks), new ItemStack(Items.stick), new ItemStack(Items.stick));
+        InfusionRecipes.addInfusion(new ItemStack(Blocks.crafting_table), new ItemStack(Items.iron_ingot), new ItemStack(Blocks.wooden_slab), new ItemStack(Items.stick), new ItemStack(Blocks.wooden_slab), new ItemStack(Items.stick));
+        InfusionRecipes.addInfusion(new ItemStack(Blocks.crafting_table), new ItemStack(Items.iron_ingot), new ItemStack(Blocks.planks), new ItemStack(Items.stick), new ItemStack(Blocks.planks), new ItemStack(Items.stick));
 
         LogHelper.info("Loaded " + InfusionRecipes.getRecipes().size() + " infusion recipe(s)...");
     }
