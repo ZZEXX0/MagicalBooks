@@ -27,37 +27,26 @@ public class ItemRendererPedestal implements IItemRenderer {
         return true;
     }
 
-    public void renderItem(ItemRenderType itemRenderType, ItemStack itemStack, Object... data)
-    {
-        switch (itemRenderType)
-        {
+    public void renderItem(ItemRenderType itemRenderType, ItemStack itemStack, Object... data) {
+        switch (itemRenderType) {
             case ENTITY:
-            {
                 //-0.5f 0.12f 0.5f
                 renderPedestal(0F, 0.12f, 0.0F);
                 return;
-            }
             case EQUIPPED:
-            {
                 renderPedestal(0.0F, 0.0F, 1.0F);
                 return;
-            }
             case EQUIPPED_FIRST_PERSON:
-            {
                 renderPedestal(1.0F, 1.0F, 1.0F);
                 return;
-            }
             case INVENTORY:
-            {
                 renderPedestal(0F, 0.1F, 0.0F);
                 return;
-            }
             default:
         }
     }
 
-    private void renderPedestal(float x, float y, float z)
-    {
+    private void renderPedestal(float x, float y, float z) {
         GL11.glPushMatrix();
 
         // Scale, Translate, Rotate

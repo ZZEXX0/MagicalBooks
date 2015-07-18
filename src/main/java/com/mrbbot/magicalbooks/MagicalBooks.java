@@ -3,6 +3,7 @@ package com.mrbbot.magicalbooks;
 import com.mrbbot.magicalbooks.init.ModBlocks;
 import com.mrbbot.magicalbooks.init.ModItems;
 import com.mrbbot.magicalbooks.init.ModTileEntities;
+import com.mrbbot.magicalbooks.init.Recipies;
 import com.mrbbot.magicalbooks.proxy.IProxy;
 import com.mrbbot.magicalbooks.reference.Reference;
 import com.mrbbot.magicalbooks.utility.LogHelper;
@@ -35,6 +36,8 @@ public class MagicalBooks {
         proxy.registerTileEntitySpecialRenderers();
 
         ModTileEntities.init();
+
+        Recipies.init();
 
         LogHelper.info("Initialization Complete!");
     }

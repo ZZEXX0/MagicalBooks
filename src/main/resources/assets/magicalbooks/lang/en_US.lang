@@ -4,3 +4,6 @@ itemGroup.MagicalBooks=Magical Books
 # Items
 item.magicalbooks:bookGrowth.name=Book of Growth
 item.magicalbooks:bookJump.name=Book of Leaping
+
+# Blocks
+tile.magicalbooks:blockPedestal.name=Pedestal

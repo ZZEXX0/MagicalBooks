@@ -10,6 +10,7 @@ import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 public class BlockPedestal extends BlockContainer {
@@ -17,6 +18,11 @@ public class BlockPedestal extends BlockContainer {
         super(Material.rock);
         this.setBlockName(Names.Blocks.PEDESTAL);
         this.setCreativeTab(CreativeTabMagicalBooks.MAGICALBOOKS_TAB);
+    }
+
+    @Override
+    public boolean canConnectRedstone(IBlockAccess iba, int i, int j, int k, int dir) {
+        return true;
     }
 
     @Override
