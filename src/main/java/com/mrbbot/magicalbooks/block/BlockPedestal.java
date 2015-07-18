@@ -3,6 +3,7 @@ package com.mrbbot.magicalbooks.block;
 import com.mrbbot.magicalbooks.block.tileentity.TileEntityPedestal;
 import com.mrbbot.magicalbooks.creativetab.CreativeTabMagicalBooks;
 import com.mrbbot.magicalbooks.init.InfusionRecipes;
+import com.mrbbot.magicalbooks.init.ModItems;
 import com.mrbbot.magicalbooks.reference.Names;
 import com.mrbbot.magicalbooks.reference.Reference;
 import com.mrbbot.magicalbooks.utility.LogHelper;
@@ -12,11 +13,9 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 public class BlockPedestal extends BlockContainer {
@@ -25,11 +24,6 @@ public class BlockPedestal extends BlockContainer {
         this.setBlockName(Names.Blocks.PEDESTAL);
         this.setCreativeTab(CreativeTabMagicalBooks.MAGICALBOOKS_TAB);
 
-    }
-
-    @Override
-    public boolean canConnectRedstone(IBlockAccess iba, int i, int j, int k, int dir) {
-        return true;
     }
 
     @Override
@@ -55,6 +49,11 @@ public class BlockPedestal extends BlockContainer {
             TileEntityPedestal tileEntityPedestal = (TileEntityPedestal)world.getTileEntity(x, y, z);
             if (tileEntityPedestal != null) {
                 ItemStack stack = player.getHeldItem();
+                if(stack != null && stack.getItem().equals(ModItems.itemActivationStick)) {
+                    TileEntityPedestal pedestal = (TileEntityPedestal) world.getTileEntity(x, y, z);
+                    InfusionRecipes.craft(pedestal);
+                    return true;
+                }
                 if(tileEntityPedestal.getItemStack() != null) {
                     LogHelper.info("Removing item from pedestal at (" + x + "," + y + "," + z + ")...");
                     tileEntityPedestal.dropItem();
@@ -78,36 +77,6 @@ public class BlockPedestal extends BlockContainer {
     public void breakBlock(World world, int x, int y, int z, Block block, int p6) {
         TileEntityPedestal pedestal = (TileEntityPedestal)world.getTileEntity(x, y, z);
         pedestal.dropItem();
-    }
-
-    @Override
-    public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase entityLiving, ItemStack itemStack) {
-        if (!world.isRemote) {
-            this.updatePedestal(world, x, y, z);
-        }
-    }
-
-    @Override
-    public void onNeighborBlockChange(World world, int x, int y, int z, Block block) {
-        if (!world.isRemote) {
-            this.updatePedestal(world, x, y, z);
-        }
-    }
-
-    @Override
-    public void onBlockAdded(World world, int x, int y, int z) {
-        if (!world.isRemote && world.getTileEntity(x, y, z) == null) {
-            this.updatePedestal(world, x, y, z);
-        }
-    }
-
-    private void updatePedestal(World world, int x, int y, int z) {
-        boolean power = world.isBlockIndirectlyGettingPowered(x, y, z);
-        if(power) {
-            world.playSoundEffect(x, y, z, "random.fizz", 1, 1);
-            TileEntityPedestal pedestal = (TileEntityPedestal)world.getTileEntity(x, y, z);
-            InfusionRecipes.craft(pedestal);
-        }
     }
 
     //STANDARD BLOCK CODE

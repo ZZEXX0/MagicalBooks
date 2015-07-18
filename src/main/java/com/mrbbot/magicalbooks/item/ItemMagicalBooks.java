@@ -13,6 +13,7 @@ import java.util.List;
 
 public class ItemMagicalBooks extends Item {
     private String[] lore;
+    private boolean hasEffect;
 
     public ItemMagicalBooks()
     {
@@ -25,6 +26,10 @@ public class ItemMagicalBooks extends Item {
         this.lore = lore;
     }
 
+    protected void setHasEffect(boolean hasEffect) {
+        this.hasEffect = hasEffect;
+    }
+
     @Override
     public void addInformation(ItemStack par1ItemStack, EntityPlayer player, List par2List, boolean par4) {
         for(String line : lore)
@@ -34,7 +39,7 @@ public class ItemMagicalBooks extends Item {
     @Override
     @SideOnly(Side.CLIENT)
     public boolean hasEffect(ItemStack stack) {
-        return true;
+        return hasEffect;
     }
 
     @Override

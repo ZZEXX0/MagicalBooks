@@ -3,13 +3,18 @@ package com.mrbbot.magicalbooks.init;
 import com.mrbbot.magicalbooks.block.tileentity.TileEntityPedestal;
 import com.mrbbot.magicalbooks.reference.Reference;
 import com.mrbbot.magicalbooks.utility.LogHelper;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.world.World;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 
 public class InfusionRecipes {
 
@@ -40,6 +45,7 @@ public class InfusionRecipes {
     }
 
     public static void craft(TileEntityPedestal main) {
+        LogHelper.info("Attempting infusion with pedestal (" + main.xCoord + "," + main.yCoord + "," + main.zCoord + ")...");
         HashMap<TileEntityPedestal, Boolean> otherPedestals = new HashMap<TileEntityPedestal, Boolean>();
         for(int xOffset = -Reference.INFUSION_RANGE; xOffset <= Reference.INFUSION_RANGE; xOffset++) {
             for(int zOffset = -Reference.INFUSION_RANGE; zOffset <= Reference.INFUSION_RANGE; zOffset++) {
@@ -52,9 +58,9 @@ public class InfusionRecipes {
                 }
             }
         }
+        boolean crafted = false;
         for(InfusionRecipe infusionRecipe : recipes) {
-            //check main component
-            if(main.getItemStack().isItemEqual(infusionRecipe.getMain())) {
+            if(main.getItemStack() != null && main.getItemStack().isItemEqual(infusionRecipe.getMain())) {
                 HashMap<ItemStack,Boolean> needs = new HashMap<ItemStack, Boolean>();
                 for(ItemStack otherItemStack : infusionRecipe.getOthers()) needs.put(otherItemStack, false);
 
@@ -74,12 +80,16 @@ public class InfusionRecipes {
                             pedestal.getKey().setItemStack(null);
                         }
                     }
-
                     main.setItemStack(infusionRecipe.getOutput());
+                    crafted = true;
                     break;
                 }
             }
         }
+        if(crafted)
+            main.getWorldObj().playSoundEffect(main.xCoord, main.yCoord, main.zCoord, "random.fizz", 1, 1);
+        else
+            main.getWorldObj().playSoundEffect(main.xCoord, main.yCoord, main.zCoord, "note.bass", 1, 1);
     }
 
     private static boolean hasItem(HashMap<TileEntityPedestal, Boolean> otherPedestals, ItemStack stack) {
@@ -97,7 +107,9 @@ public class InfusionRecipes {
     }
 
     public static void init() {
+
         addRecipe(new ItemStack(ModItems.bookJump), new ItemStack(Items.book), new ItemStack(Items.nether_star), new ItemStack(Items.feather));
+        addRecipe(new ItemStack(Blocks.crafting_table), new ItemStack(Items.iron_ingot), new ItemStack(Blocks.planks), new ItemStack(Blocks.planks), new ItemStack(Items.stick), new ItemStack(Items.stick));
 
         LogHelper.info("Loaded " + recipes.size() + " infusion recipe(s)...");
     }

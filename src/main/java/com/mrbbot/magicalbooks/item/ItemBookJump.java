@@ -12,6 +12,7 @@ public class ItemBookJump extends ItemMagicalBooks {
         super();
         setUnlocalizedName(Names.Items.BOOK_JUMP);
         setLore("Infinite jumping!");
+        setHasEffect(true);
     }
 
     public ItemStack onItemRightClick(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer) {

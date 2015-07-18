@@ -16,6 +16,7 @@ public class ItemBookGrowth extends ItemMagicalBooks {
 		super();
         setUnlocalizedName(Names.Items.BOOK_GROWTH);
         setLore("Grows things!");
+        setHasEffect(true);
 	}
 	
 	public boolean onItemUse(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, World par3World, int x, int y, int z, int par7, float par8, float par9, float par10) {

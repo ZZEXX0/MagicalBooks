@@ -9,6 +9,7 @@ import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 
 public class TileEntityPedestal extends TileEntity {
+    public int lastSecond = -1;
     public float rotValue = 0f;
 
     private ItemStack itemStack;
