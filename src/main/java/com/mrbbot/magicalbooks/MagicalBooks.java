@@ -34,8 +34,7 @@ public class MagicalBooks {
 
         ModTileEntities.init();
 
-        Recipies.init();
-        InfusionRecipes.init();
+        Recipes.init();
 
         LogHelper.info("Initialization Complete!");
     }

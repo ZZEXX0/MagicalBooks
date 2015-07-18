@@ -3,18 +3,14 @@ package com.mrbbot.magicalbooks.init;
 import com.mrbbot.magicalbooks.block.tileentity.TileEntityPedestal;
 import com.mrbbot.magicalbooks.reference.Reference;
 import com.mrbbot.magicalbooks.utility.LogHelper;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.world.World;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Random;
 
 public class InfusionRecipes {
 
@@ -102,16 +98,11 @@ public class InfusionRecipes {
         return false;
     }
 
-    public static void addRecipe(ItemStack output, ItemStack main, ItemStack... others) {
+    public static void addInfusion(ItemStack output, ItemStack main, ItemStack... others) {
         recipes.add(new InfusionRecipe(output, main, others));
     }
 
-    public static void init() {
-
-        addRecipe(new ItemStack(ModItems.bookJump), new ItemStack(Items.book), new ItemStack(Items.nether_star), new ItemStack(Items.feather));
-        addRecipe(new ItemStack(Blocks.crafting_table), new ItemStack(Items.iron_ingot), new ItemStack(Blocks.planks), new ItemStack(Blocks.planks), new ItemStack(Items.stick), new ItemStack(Items.stick));
-
-        LogHelper.info("Loaded " + recipes.size() + " infusion recipe(s)...");
+    public static ArrayList<InfusionRecipe> getRecipes() {
+        return recipes;
     }
-
 }
