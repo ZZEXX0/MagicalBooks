@@ -42,24 +42,31 @@ public class BlockPedestal extends BlockContainer {
     }
 
     @Override
-    public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int p6, float p7, float p8, float p9) {
-        if (world.isRemote) {
+    @SideOnly(Side.CLIENT)
+    public void registerBlockIcons(IIconRegister iconRegister)
+    {
+        blockIcon = iconRegister.registerIcon(String.format("%s", getUnwrappedUnlocalizedName(this.getUnlocalizedName())));
+    }
+
+    @Override
+    public boolean onBlockActivated(World worldIn, int x, int y, int z, EntityPlayer playerIn, int side, float hitX, float hitY, float hitZ) {
+        if (worldIn.isRemote) {
             return true;
         } else {
-            TileEntityPedestal tileEntityPedestal = (TileEntityPedestal)world.getTileEntity(x, y, z);
+            TileEntityPedestal tileEntityPedestal = (TileEntityPedestal)worldIn.getTileEntity(x, y, z);
             if (tileEntityPedestal != null) {
-                ItemStack stack = player.getHeldItem();
+                ItemStack stack = playerIn.getHeldItem();
                 if(stack != null && stack.getItem().equals(ModItems.itemActivationStick)) {
-                    TileEntityPedestal pedestal = (TileEntityPedestal) world.getTileEntity(x, y, z);
-                    InfusionRecipes.craft(pedestal);
+                    TileEntityPedestal pedestal = (TileEntityPedestal) worldIn.getTileEntity(x, y, z);
+                    InfusionRecipes.infuse(pedestal);
                     return true;
                 }
                 if(tileEntityPedestal.getItemStack() != null) {
-                    LogHelper.info("Removing item from pedestal at (" + x + "," + y + "," + z + ")...");
-                    tileEntityPedestal.dropItem();
+                    LogHelper.info("Removing item from pedestal...");
+                    tileEntityPedestal.dropItemStack();
                 }
                 if(stack != null) {
-                    LogHelper.info("Setting item for pedestal at (" + x + "," + y + "," + z + ")...");
+                    LogHelper.info("Setting item for pedestal at...");
                     ItemStack oneItem = new ItemStack(stack.getItem());
                     oneItem.setItemDamage(stack.getItemDamage());
                     oneItem.setRepairCost(stack.getRepairCost());
@@ -76,7 +83,7 @@ public class BlockPedestal extends BlockContainer {
     @Override
     public void breakBlock(World world, int x, int y, int z, Block block, int p6) {
         TileEntityPedestal pedestal = (TileEntityPedestal)world.getTileEntity(x, y, z);
-        pedestal.dropItem();
+        pedestal.dropItemStack();
     }
 
     //STANDARD BLOCK CODE
@@ -84,13 +91,6 @@ public class BlockPedestal extends BlockContainer {
     public String getUnlocalizedName()
     {
         return String.format("tile.%s%s", Reference.MOD_ID.toLowerCase() + ":", getUnwrappedUnlocalizedName(super.getUnlocalizedName()));
-    }
-
-    @Override
-    @SideOnly(Side.CLIENT)
-    public void registerBlockIcons(IIconRegister iconRegister)
-    {
-        blockIcon = iconRegister.registerIcon(String.format("%s", getUnwrappedUnlocalizedName(this.getUnlocalizedName())));
     }
 
     protected String getUnwrappedUnlocalizedName(String unlocalizedName)

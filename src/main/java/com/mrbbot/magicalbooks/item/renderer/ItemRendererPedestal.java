@@ -2,10 +2,9 @@ package com.mrbbot.magicalbooks.item.renderer;
 
 import com.mrbbot.magicalbooks.block.model.ModelPedestal;
 import com.mrbbot.magicalbooks.reference.Textures;
-import cpw.mods.fml.client.FMLClientHandler;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.IItemRenderer;
+import cpw.mods.fml.client.FMLClientHandler;
 import org.lwjgl.opengl.GL11;
 
 public class ItemRendererPedestal implements IItemRenderer {

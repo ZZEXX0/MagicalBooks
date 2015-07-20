@@ -9,7 +9,6 @@ import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 
 public class TileEntityPedestal extends TileEntity {
-    public int lastSecond = -1;
     public float rotValue = 0f;
 
     private ItemStack itemStack;
@@ -56,7 +55,7 @@ public class TileEntityPedestal extends TileEntity {
     public Packet getDescriptionPacket() {
         NBTTagCompound syncData = new NBTTagCompound();
         this.writeSyncableDataToNBT(syncData);
-        return new S35PacketUpdateTileEntity(this.xCoord, this.yCoord, this.zCoord, 1, syncData);
+        return new S35PacketUpdateTileEntity(xCoord, yCoord, zCoord, 1, syncData);
     }
 
     @Override
@@ -64,11 +63,10 @@ public class TileEntityPedestal extends TileEntity {
         readSyncableDataFromNBT(pkt.func_148857_g());
     }
 
-    public void dropItem() {
+    public void dropItemStack() {
         if(itemStack != null) {
             EntityItem item = new EntityItem(worldObj, xCoord, yCoord + 1, zCoord, itemStack);
             worldObj.spawnEntityInWorld(item);
-            //item.delayBeforeCanPickup = 0;
             setItemStack(null);
         }
     }

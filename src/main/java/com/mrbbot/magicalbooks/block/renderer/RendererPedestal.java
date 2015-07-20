@@ -20,13 +20,10 @@ public class RendererPedestal extends TileEntitySpecialRenderer {
 
     public RendererPedestal() {
         modelPedestal = new ModelPedestal();
-        customRenderItem = new RenderItem()
-        {
+        customRenderItem = new RenderItem() {
             @Override
-            public boolean shouldBob()
-            {
-
-                return true;
+            public boolean shouldBob() {
+                return false;
             }
         };
 
@@ -35,7 +32,7 @@ public class RendererPedestal extends TileEntitySpecialRenderer {
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void renderTileEntityAt(TileEntity te, double x, double y, double z, float scale) {
+    public void renderTileEntityAt(TileEntity te, double x, double y, double z, float p8) {
         GL11.glPushMatrix();
         GL11.glTranslatef((float) x + 0.5F, (float) y + 0.5F, (float) z + 0.5F);
 
@@ -59,7 +56,7 @@ public class RendererPedestal extends TileEntitySpecialRenderer {
             ghostEntityItem.hoverStart = 0.0F;
             ghostEntityItem.setEntityItemStack(itemStack);
 
-            GL11.glTranslated(x + 0.5, y + 1, z + 0.5);
+            GL11.glTranslated(x + 0.5, y + 1.2, z + 0.5);
 
             pedestal.rotValue += 0.5f;
             GL11.glRotatef(pedestal.rotValue, 0, 1, 0);

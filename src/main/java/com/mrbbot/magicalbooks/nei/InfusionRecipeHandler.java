@@ -7,6 +7,7 @@ import com.mrbbot.magicalbooks.init.InfusionRecipes;
 import com.mrbbot.magicalbooks.reference.Names;
 import com.mrbbot.magicalbooks.reference.Reference;
 import com.mrbbot.magicalbooks.reference.Textures;
+import com.mrbbot.magicalbooks.utility.LogHelper;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.StatCollector;
 import org.lwjgl.opengl.GL11;
@@ -90,6 +91,17 @@ public class InfusionRecipeHandler extends TemplateRecipeHandler {
     }
 
     @Override
+    public void loadCraftingRecipes(String outputId, Object... results) {
+        if (outputId.equals(getRecipeID())) {
+            for (InfusionRecipes.InfusionRecipe recipe : InfusionRecipes.getRecipes()) {
+                arecipes.add(new CachedInfusion(recipe));
+            }
+        } else {
+            super.loadCraftingRecipes(outputId, results);
+        }
+    }
+
+    @Override
     public void loadCraftingRecipes(ItemStack result) {
         for (InfusionRecipes.InfusionRecipe recipe : InfusionRecipes.getRecipes()) {
             if (NEIServerUtils.areStacksSameTypeCrafting(recipe.getOutput(), result)) {
@@ -99,13 +111,29 @@ public class InfusionRecipeHandler extends TemplateRecipeHandler {
     }
 
     @Override
-    public void loadCraftingRecipes(String outputId, Object... results) {
-        if (outputId.equals(getRecipeID())) {
+    public void loadUsageRecipes(String inputId, Object... ingredients) {
+        if (inputId.equals(getRecipeID())) {
             for (InfusionRecipes.InfusionRecipe recipe : InfusionRecipes.getRecipes()) {
                 arecipes.add(new CachedInfusion(recipe));
             }
         } else {
-            super.loadCraftingRecipes(outputId, results);
+            super.loadUsageRecipes(inputId, ingredients);
+        }
+    }
+
+    @Override
+    public void loadUsageRecipes(ItemStack ingredient) {
+        for (InfusionRecipes.InfusionRecipe recipe : InfusionRecipes.getRecipes()) {
+            boolean hasItem = false;
+            for(ItemStack stack : recipe.getOthers()) {
+                if(NEIServerUtils.areStacksSameTypeCrafting(stack, ingredient))
+                    hasItem = true;
+            }
+            if(NEIServerUtils.areStacksSameTypeCrafting(recipe.getMain(), ingredient))
+                hasItem = true;
+            if (hasItem) {
+                arecipes.add(new CachedInfusion(recipe));
+            }
         }
     }
 

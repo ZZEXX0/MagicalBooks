@@ -3,8 +3,6 @@ package com.mrbbot.magicalbooks.init;
 import com.mrbbot.magicalbooks.block.tileentity.TileEntityPedestal;
 import com.mrbbot.magicalbooks.reference.Reference;
 import com.mrbbot.magicalbooks.utility.LogHelper;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 
@@ -40,7 +38,7 @@ public class InfusionRecipes {
         }
     }
 
-    public static void craft(TileEntityPedestal main) {
+    public static void infuse(TileEntityPedestal main) {
         LogHelper.info("Attempting infusion with pedestal (" + main.xCoord + "," + main.yCoord + "," + main.zCoord + ")...");
         HashMap<TileEntityPedestal, Boolean> otherPedestals = new HashMap<TileEntityPedestal, Boolean>();
         for(int xOffset = -Reference.INFUSION_RANGE; xOffset <= Reference.INFUSION_RANGE; xOffset++) {
@@ -69,7 +67,6 @@ public class InfusionRecipes {
                         break;
                     }
                 }
-
                 if(allNeedsCovered) {
                     for(Map.Entry<TileEntityPedestal, Boolean> pedestal : otherPedestals.entrySet()) {
                         if(pedestal.getValue()) {

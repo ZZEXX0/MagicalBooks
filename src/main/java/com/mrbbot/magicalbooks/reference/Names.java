@@ -5,6 +5,7 @@ public final class Names {
         public static final String BOOK_GROWTH = "bookGrowth";
         public static final String BOOK_JUMP = "bookJump";
         public static final String ACTIVATION_STICK = "activationStick";
+        public static final String BOOK_CRAFT = "bookCraft";
     }
 
     public static final class Blocks {
