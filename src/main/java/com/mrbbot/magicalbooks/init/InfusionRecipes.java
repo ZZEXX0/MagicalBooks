@@ -1,10 +1,11 @@
 package com.mrbbot.magicalbooks.init;
 
-import com.mrbbot.magicalbooks.block.tileentity.TileEntityPedestal;
+import com.mrbbot.magicalbooks.tileentity.TileEntityPedestal;
 import com.mrbbot.magicalbooks.reference.Reference;
 import com.mrbbot.magicalbooks.utility.LogHelper;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.BlockPos;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -51,13 +52,14 @@ public class InfusionRecipes {
     }
 
     public static void infuse(TileEntityPedestal main) {
-        LogHelper.info("Attempting infusion with pedestal (" + main.xCoord + "," + main.yCoord + "," + main.zCoord + ")...");
+        LogHelper.info("Attempting infusion with pedestal " + main.getPos() + "...");
+        BlockPos pos = main.getPos();
         HashMap<TileEntityPedestal, Boolean> otherPedestals = new HashMap<TileEntityPedestal, Boolean>();
         for(int xOffset = -Reference.INFUSION_RANGE; xOffset <= Reference.INFUSION_RANGE; xOffset++) {
             for(int zOffset = -Reference.INFUSION_RANGE; zOffset <= Reference.INFUSION_RANGE; zOffset++) {
-                int x = main.xCoord + xOffset;
-                int z = main.zCoord + zOffset;
-                TileEntity tileEntity = main.getWorldObj().getTileEntity(x, main.yCoord, z);
+                int x = pos.getX() + xOffset;
+                int z = pos.getZ() + zOffset;
+                TileEntity tileEntity = main.getWorld().getTileEntity(new BlockPos(x, pos.getY(), z));
                 if(tileEntity != null && tileEntity instanceof TileEntityPedestal) {
                     if(!tileEntity.equals(main))
                         otherPedestals.put((TileEntityPedestal) tileEntity, false);
@@ -92,9 +94,9 @@ public class InfusionRecipes {
             }
         }
         if(crafted)
-            main.getWorldObj().playSoundEffect(main.xCoord, main.yCoord, main.zCoord, "random.fizz", 1, 1);
+            main.getWorld().playSoundEffect(pos.getX(), pos.getY(), pos.getZ(), "random.fizz", 1, 1);
         else
-            main.getWorldObj().playSoundEffect(main.xCoord, main.yCoord, main.zCoord, "note.bass", 1, 1);
+            main.getWorld().playSoundEffect(pos.getX(), pos.getY(), pos.getZ(), "note.bass", 1, 1);
     }
 
     private static boolean hasItem(HashMap<TileEntityPedestal, Boolean> otherPedestals, ItemStack stack) {

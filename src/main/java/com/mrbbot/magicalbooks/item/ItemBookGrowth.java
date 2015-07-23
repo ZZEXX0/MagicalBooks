@@ -1,11 +1,13 @@
 package com.mrbbot.magicalbooks.item;
 
 import com.mrbbot.magicalbooks.reference.Names;
-import net.minecraft.block.Block;
 import net.minecraft.block.IGrowable;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemDye;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
 
 import java.util.Random;
@@ -19,18 +21,18 @@ public class ItemBookGrowth extends ItemMagicalBooks {
 	}
 
     @Override
-    public boolean onItemUse(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, World par3World, int x, int y, int z, int par7, float par8, float par9, float par10) {
-        if(ItemDye.applyBonemeal(par1ItemStack, par3World, x, y, z, par2EntityPlayer)) {
+    public boolean onItemUse(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, World par3World, BlockPos pos, EnumFacing side, float hitX, float hitY, float hitZ) {
+        if(ItemDye.applyBonemeal(par1ItemStack, par3World, pos, par2EntityPlayer)) {
     		if (!par3World.isRemote) {
-            	par3World.playAuxSFX(2005, x, y, z, 0);
+            	par3World.playAuxSFX(2005, pos, 0);
          	}
     		return true;
     	}
 
-        Block block = par3World.getBlock(x, y, z);
-        if(block instanceof IGrowable) {
-            IGrowable plant = (IGrowable)block;
-            plant.func_149853_b(par3World, new Random(), x, y, z);
+        IBlockState blockState = par3World.getBlockState(pos);
+        if(blockState.getBlock() instanceof IGrowable) {
+            IGrowable plant = (IGrowable)blockState.getBlock();
+            plant.grow(par3World, new Random(), pos, blockState);
         }
 
 

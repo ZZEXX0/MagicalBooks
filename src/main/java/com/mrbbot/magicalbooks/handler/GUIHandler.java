@@ -4,7 +4,7 @@ import com.mrbbot.magicalbooks.gui.GuiBookCrafting;
 import com.mrbbot.magicalbooks.inventory.ContainerBookCrafting;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
-import cpw.mods.fml.common.network.IGuiHandler;
+import net.minecraftforge.fml.common.network.IGuiHandler;
 
 public class GUIHandler implements IGuiHandler {
     @Override

@@ -1,4 +1,4 @@
-package com.mrbbot.magicalbooks.block.tileentity;
+package com.mrbbot.magicalbooks.tileentity;
 
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.ItemStack;
@@ -22,7 +22,7 @@ public class TileEntityPedestal extends TileEntity {
     }
 
     public void setItemStack(ItemStack itemStack) {
-        worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+        worldObj.markBlockForUpdate(pos);
         markDirty();
         this.itemStack = itemStack;
     }
@@ -55,17 +55,17 @@ public class TileEntityPedestal extends TileEntity {
     public Packet getDescriptionPacket() {
         NBTTagCompound syncData = new NBTTagCompound();
         this.writeSyncableDataToNBT(syncData);
-        return new S35PacketUpdateTileEntity(xCoord, yCoord, zCoord, 1, syncData);
+        return new S35PacketUpdateTileEntity(pos, 1, syncData);
     }
 
     @Override
     public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity pkt) {
-        readSyncableDataFromNBT(pkt.func_148857_g());
+        readSyncableDataFromNBT(pkt.getNbtCompound());
     }
 
     public void dropItemStack() {
         if(itemStack != null) {
-            EntityItem item = new EntityItem(worldObj, xCoord, yCoord + 1, zCoord, itemStack);
+            EntityItem item = new EntityItem(worldObj, pos.getX(), pos.getY() + 1, pos.getZ(), itemStack);
             worldObj.spawnEntityInWorld(item);
             setItemStack(null);
         }

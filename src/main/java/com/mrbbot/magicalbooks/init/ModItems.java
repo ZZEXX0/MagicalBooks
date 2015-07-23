@@ -2,7 +2,7 @@ package com.mrbbot.magicalbooks.init;
 
 import com.mrbbot.magicalbooks.item.*;
 import com.mrbbot.magicalbooks.reference.Names;
-import cpw.mods.fml.common.registry.GameRegistry;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.item.ItemStack;
 

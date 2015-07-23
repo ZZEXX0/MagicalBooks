@@ -2,16 +2,13 @@
 itemGroup.MagicalBooks=Magical Books
 
 # Items
-item.magicalbooks:bookGrowth.name=Book of Growth
-item.magicalbooks:bookJump.name=Book of Leaping
-item.magicalbooks:activationStick.name=Rod of Activation
-item.magicalbooks:bookCraft.name=Book of Crafting
-item.magicalbooks:bookStar.name=Book of Nether Stars
+item.magicalbooks:book_growth.name=Book of Growth
+item.magicalbooks:book_jump.name=Book of Leaping
+item.magicalbooks:activation_stick.name=Rod of Activation
+item.magicalbooks:book_craft.name=Book of Crafting
+item.magicalbooks:book_star.name=Book of Nether Stars
 
 # Blocks
-tile.magicalbooks:blockPedestal.name=Pedestal
-
-# Gui
-gui.nei.magicalbooks:pedestalInfusion=Pedestal Infusion
+tile.magicalbooks:block_pedestal.name=Pedestal
 
 container.bookCrafting=Book of Crafting

@@ -1,19 +1,18 @@
 package com.mrbbot.magicalbooks;
 
 import com.mrbbot.magicalbooks.handler.GUIHandler;
-import com.mrbbot.magicalbooks.init.ModBlocks;
-import com.mrbbot.magicalbooks.init.ModItems;
-import com.mrbbot.magicalbooks.init.ModTileEntities;
-import com.mrbbot.magicalbooks.init.Recipes;
+import com.mrbbot.magicalbooks.init.*;
 import com.mrbbot.magicalbooks.proxy.IProxy;
 import com.mrbbot.magicalbooks.reference.Reference;
 import com.mrbbot.magicalbooks.utility.LogHelper;
-import cpw.mods.fml.common.Mod;
-import cpw.mods.fml.common.SidedProxy;
-import cpw.mods.fml.common.event.FMLInitializationEvent;
-import cpw.mods.fml.common.event.FMLPostInitializationEvent;
-import cpw.mods.fml.common.event.FMLPreInitializationEvent;
-import cpw.mods.fml.common.network.NetworkRegistry;
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.Item;
+import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.SidedProxy;
+import net.minecraftforge.fml.common.event.FMLInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.network.NetworkRegistry;
 
 @Mod(modid = Reference.MOD_ID, name = Reference.MOD_NAME, version = Reference.VERSION)
 public class MagicalBooks {
@@ -23,6 +22,13 @@ public class MagicalBooks {
 
     @SidedProxy(clientSide = Reference.CLIENT_PROXY_CLASS, serverSide = Reference.SERVER_PROXY_CLASS)
     public static IProxy proxy;
+
+    public static CreativeTabs tabMagicalBooks = new CreativeTabs(Reference.MOD_ID) {
+        @Override
+        public Item getTabIconItem() {
+            return ModItems.bookStar;
+        }
+    };
 
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
@@ -37,7 +43,7 @@ public class MagicalBooks {
 
     @Mod.EventHandler
     public void init(FMLInitializationEvent event) {
-        proxy.registerTileEntitySpecialRenderers();
+        proxy.registerRenderers();
 
         ModTileEntities.init();
 

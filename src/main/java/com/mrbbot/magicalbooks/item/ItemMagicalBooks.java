@@ -1,13 +1,12 @@
 package com.mrbbot.magicalbooks.item;
 
-import com.mrbbot.magicalbooks.creativetab.CreativeTabMagicalBooks;
+import com.mrbbot.magicalbooks.MagicalBooks;
 import com.mrbbot.magicalbooks.reference.Reference;
-import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.List;
 
@@ -19,7 +18,7 @@ public class ItemMagicalBooks extends Item {
     {
         super();
         this.maxStackSize = 1;
-        setCreativeTab(CreativeTabMagicalBooks.MAGICALBOOKS_TAB);
+        setCreativeTab(MagicalBooks.tabMagicalBooks);
     }
 
     protected void setLore(String... lore) {
@@ -48,12 +47,12 @@ public class ItemMagicalBooks extends Item {
         return String.format("item.%s%s", Reference.MOD_ID.toLowerCase() + ":", getUnwrappedUnlocalizedName(super.getUnlocalizedName()));
     }
 
-    @Override
+/*    @Override
     @SideOnly(Side.CLIENT)
     public void registerIcons(IIconRegister iconRegister)
     {
         itemIcon = iconRegister.registerIcon(this.getUnlocalizedName().substring(this.getUnlocalizedName().indexOf(".") + 1));
-    }
+    }*/
 
     @Override
     public String getUnlocalizedName(ItemStack itemStack)
