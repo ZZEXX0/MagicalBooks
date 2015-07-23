@@ -15,11 +15,15 @@ public class InfusionRecipes {
     private static ArrayList<InfusionRecipe> recipes = new ArrayList<InfusionRecipe>();
 
     public static class InfusionRecipe {
+        private int xp;
+        private float health;
         private ItemStack output;
         private ItemStack main;
         private ItemStack[] others;
 
-        public InfusionRecipe(ItemStack output, ItemStack main, ItemStack[] others) {
+        public InfusionRecipe(float health, int xp, ItemStack output, ItemStack main, ItemStack[] others) {
+            this.xp = xp;
+            this.health = health;
             this.output = output;
             this.main = main;
             this.others = others;
@@ -35,6 +39,14 @@ public class InfusionRecipes {
 
         public ItemStack[] getOthers() {
             return others;
+        }
+
+        public int getXp() {
+            return xp;
+        }
+
+        public float getHealth() {
+            return health;
         }
     }
 
@@ -95,8 +107,8 @@ public class InfusionRecipes {
         return false;
     }
 
-    public static void addInfusion(ItemStack output, ItemStack main, ItemStack... others) {
-        recipes.add(new InfusionRecipe(output, main, others));
+    public static void addInfusion(float health, int xp, ItemStack output, ItemStack main, ItemStack... others) {
+        recipes.add(new InfusionRecipe(health, xp, output, main, others));
     }
 
     public static ArrayList<InfusionRecipe> getRecipes() {

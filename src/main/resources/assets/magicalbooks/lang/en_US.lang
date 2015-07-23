@@ -6,6 +6,7 @@ item.magicalbooks:bookGrowth.name=Book of Growth
 item.magicalbooks:bookJump.name=Book of Leaping
 item.magicalbooks:activationStick.name=Rod of Activation
 item.magicalbooks:bookCraft.name=Book of Crafting
+item.magicalbooks:bookStar.name=Book of Nether Stars
 
 # Blocks
 tile.magicalbooks:blockPedestal.name=Pedestal

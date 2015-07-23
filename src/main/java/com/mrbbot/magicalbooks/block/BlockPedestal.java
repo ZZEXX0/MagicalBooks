@@ -16,6 +16,7 @@ import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 
 public class BlockPedestal extends BlockContainer {
@@ -57,6 +58,15 @@ public class BlockPedestal extends BlockContainer {
             if (tileEntityPedestal != null) {
                 ItemStack stack = playerIn.getHeldItem();
                 if(stack != null && stack.getItem().equals(ModItems.itemActivationStick)) {
+
+                    //LogHelper.info("XP: " + playerIn.experienceLevel);
+                    //playerIn.addExperienceLevel(-1);
+
+                    //playerIn.attackEntityFrom(DamageSource.magic, 2f); //1 heart
+
+                    //playerIn.setHealth(playerIn.getHealth() - 1f);
+
+
                     TileEntityPedestal pedestal = (TileEntityPedestal) worldIn.getTileEntity(x, y, z);
                     InfusionRecipes.infuse(pedestal);
                     return true;

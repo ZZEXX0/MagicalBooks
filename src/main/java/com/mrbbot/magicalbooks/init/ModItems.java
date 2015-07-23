@@ -11,6 +11,7 @@ public class ModItems {
     public static final ItemMagicalBooks bookGrowth = new ItemBookGrowth();
     public static final ItemMagicalBooks bookJump = new ItemBookJump();
     public static final ItemMagicalBooks bookCraft = new ItemBookCraft();
+    public static final ItemMagicalBooks bookStar = new ItemBookNetherStar();
 
     public static ItemStack fireActivationStick;
 
@@ -22,5 +23,6 @@ public class ModItems {
         GameRegistry.registerItem(bookGrowth, Names.Items.BOOK_GROWTH);
         GameRegistry.registerItem(bookJump, Names.Items.BOOK_JUMP);
         GameRegistry.registerItem(bookCraft, Names.Items.BOOK_CRAFT);
+        GameRegistry.registerItem(bookStar, Names.Items.BOOK_NETHER_STAR);
     }
 }
