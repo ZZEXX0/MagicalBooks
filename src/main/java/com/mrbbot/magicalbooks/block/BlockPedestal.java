@@ -1,6 +1,7 @@
 package com.mrbbot.magicalbooks.block;
 
 import com.mrbbot.magicalbooks.MagicalBooks;
+import com.mrbbot.magicalbooks.item.ItemActivationStick;
 import com.mrbbot.magicalbooks.tileentity.TileEntityPedestal;
 import com.mrbbot.magicalbooks.init.InfusionRecipes;
 import com.mrbbot.magicalbooks.init.ModItems;
@@ -55,7 +56,7 @@ public class BlockPedestal extends Block implements ITileEntityProvider {
             TileEntityPedestal tileEntityPedestal = (TileEntityPedestal)worldIn.getTileEntity(pos);
             if (tileEntityPedestal != null) {
                 ItemStack stack = playerIn.getHeldItem();
-                if(stack != null && stack.getItem().equals(ModItems.itemActivationRod)) {
+                if(stack != null && stack.getItem() instanceof ItemActivationStick) {
 
                     //LogHelper.info("XP: " + playerIn.experienceLevel);
                     //playerIn.addExperienceLevel(-1);
@@ -66,7 +67,7 @@ public class BlockPedestal extends Block implements ITileEntityProvider {
 
 
                     TileEntityPedestal pedestal = (TileEntityPedestal) worldIn.getTileEntity(pos);
-                    InfusionRecipes.infuse(pedestal);
+                    InfusionRecipes.infuse(pedestal, stack);
                     return true;
                 }
                 if(tileEntityPedestal.getItemStack() != null) {

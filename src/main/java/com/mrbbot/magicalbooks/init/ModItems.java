@@ -7,8 +7,11 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.enchantment.Enchantment;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+
+import java.util.ArrayList;
 
 public class ModItems {
     public static final ItemMagicalBooks itemActivationRod = new ItemActivationRod();
@@ -18,6 +21,8 @@ public class ModItems {
     public static final ItemMagicalBooks bookStar = new ItemBookNetherStar();
     public static final ItemMagicalBooks bookKnowledge = new ItemBookKnowledge();
     public static final ItemMagicalBooks itemActivationStick = new ItemActivationStick();
+
+    public static final ArrayList<ItemStack> advancedItems = new ArrayList<ItemStack>();
 
     public static ItemStack fireActivationRod;
 
@@ -29,11 +34,13 @@ public class ModItems {
         GameRegistry.registerItem(itemActivationRod, Names.Items.ACTIVATION_ROD);
 
         GameRegistry.registerItem(bookCraft, Names.Items.BOOK_CRAFT);
+
         GameRegistry.registerItem(bookStar, Names.Items.BOOK_NETHER_STAR);
-
+        advancedItems.add(new ItemStack(bookStar));
         GameRegistry.registerItem(bookGrowth, Names.Items.BOOK_GROWTH);
+        advancedItems.add(new ItemStack(bookGrowth));
         GameRegistry.registerItem(bookJump, Names.Items.BOOK_JUMP);
-
+        advancedItems.add(new ItemStack(bookJump));
 
         GameRegistry.registerItem(bookKnowledge, Names.Items.BOOK_KNOWLEDGE);
     }

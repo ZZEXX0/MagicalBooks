@@ -1,6 +1,7 @@
 package com.mrbbot.magicalbooks.init;
 
 import com.mrbbot.magicalbooks.gui.util.PositionedItemStack;
+import com.mrbbot.magicalbooks.item.ItemActivationRod;
 import com.mrbbot.magicalbooks.tileentity.TileEntityPedestal;
 import com.mrbbot.magicalbooks.reference.Reference;
 import com.mrbbot.magicalbooks.utility.LogHelper;
@@ -102,7 +103,7 @@ public class InfusionRecipes {
         }
     }
 
-    public static void infuse(TileEntityPedestal main) {
+    public static void infuse(TileEntityPedestal main, ItemStack stack) {
         LogHelper.info("Attempting infusion with pedestal " + main.getPos() + "...");
         BlockPos pos = main.getPos();
         HashMap<TileEntityPedestal, Boolean> otherPedestals = new HashMap<TileEntityPedestal, Boolean>();
@@ -119,28 +120,30 @@ public class InfusionRecipes {
         }
         boolean crafted = false;
         for(InfusionRecipe infusionRecipe : recipes) {
-            if(main.getItemStack() != null && main.getItemStack().isItemEqual(infusionRecipe.getMain())) {
-                HashMap<ItemStack,Boolean> needs = new HashMap<ItemStack, Boolean>();
-                for(ItemStack otherItemStack : infusionRecipe.getOthers()) needs.put(otherItemStack, false);
+            if(!isAdvanncedItem(infusionRecipe.getOutput()) || stack.getItem() instanceof ItemActivationRod) {
+                if (main.getItemStack() != null && main.getItemStack().isItemEqual(infusionRecipe.getMain())) {
+                    HashMap<ItemStack, Boolean> needs = new HashMap<ItemStack, Boolean>();
+                    for (ItemStack otherItemStack : infusionRecipe.getOthers()) needs.put(otherItemStack, false);
 
-                boolean allNeedsCovered = true;
-                for(Map.Entry<ItemStack, Boolean> need : needs.entrySet()) {
-                    if(hasItem(otherPedestals, need.getKey())) {
-                        need.setValue(true);
-                    } else {
-                        allNeedsCovered = false;
-                        break;
-                    }
-                }
-                if(allNeedsCovered) {
-                    for(Map.Entry<TileEntityPedestal, Boolean> pedestal : otherPedestals.entrySet()) {
-                        if(pedestal.getValue()) {
-                            pedestal.getKey().setItemStack(null);
+                    boolean allNeedsCovered = true;
+                    for (Map.Entry<ItemStack, Boolean> need : needs.entrySet()) {
+                        if (hasItem(otherPedestals, need.getKey())) {
+                            need.setValue(true);
+                        } else {
+                            allNeedsCovered = false;
+                            break;
                         }
                     }
-                    main.setItemStack(infusionRecipe.getOutput());
-                    crafted = true;
-                    break;
+                    if (allNeedsCovered) {
+                        for (Map.Entry<TileEntityPedestal, Boolean> pedestal : otherPedestals.entrySet()) {
+                            if (pedestal.getValue()) {
+                                pedestal.getKey().setItemStack(null);
+                            }
+                        }
+                        main.setItemStack(infusionRecipe.getOutput());
+                        crafted = true;
+                        break;
+                    }
                 }
             }
         }
@@ -148,6 +151,14 @@ public class InfusionRecipes {
             main.getWorld().playSoundEffect(pos.getX(), pos.getY(), pos.getZ(), "random.fizz", 1, 1);
         else
             main.getWorld().playSoundEffect(pos.getX(), pos.getY(), pos.getZ(), "note.bass", 1, 1);
+    }
+
+    private static boolean isAdvanncedItem(ItemStack itemStack) {
+        for(ItemStack stack : ModItems.advancedItems) {
+            if(ItemStack.areItemsEqual(stack, itemStack))
+                return true;
+        }
+        return false;
     }
 
     private static boolean hasItem(HashMap<TileEntityPedestal, Boolean> otherPedestals, ItemStack stack) {

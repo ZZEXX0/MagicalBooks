@@ -62,8 +62,7 @@ public class GuiBookKnowledge extends GuiScreen {
                         renderList.add(new RenderText("§n" + StatCollector.translateToLocal("gui.bookKnowledge.pedestal"), INDENT, getLineY(0), 0));
                         renderList.add(new RenderRecipe(Recipes.recipePedestal, 0, -12));
                         renderList.add(new RenderText(getDescription(Names.Blocks.PEDESTAL + "2"), INDENT, getLineY(6)));
-                        addBackButton(0);
-                        addForwardButton();
+                        addBackButton();
                         break;
                     }
                 }
