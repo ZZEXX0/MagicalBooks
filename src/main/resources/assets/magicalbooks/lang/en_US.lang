@@ -4,11 +4,39 @@ itemGroup.MagicalBooks=Magical Books
 # Items
 item.magicalbooks:book_growth.name=Book of Growth
 item.magicalbooks:book_jump.name=Book of Leaping
-item.magicalbooks:activation_stick.name=Rod of Activation
+item.magicalbooks:activation_rod.name=Rod of Activation
+item.magicalbooks:activation_stick.name=Stick of Activation
 item.magicalbooks:book_craft.name=Book of Crafting
 item.magicalbooks:book_star.name=Book of Nether Stars
+item.magicalbooks:book_knowledge.name=Book of Knowledge
 
 # Blocks
 tile.magicalbooks:block_pedestal.name=Pedestal
 
+# Books
 container.bookCrafting=Book of Crafting
+
+# Achievements
+achievement.mb_ach_stick=It tingles...
+achievement.mb_ach_stick.desc=Craft a §fStick of Activation§7 with 2 redstone dust and a stick
+achievement.mb_ach_knowledge=The Knowledge
+achievement.mb_ach_knowledge.desc=Create the §fBook of Knowledge§7
+
+# Knowledge Book GUI
+gui.bookKnowledge.main=Book of Knowledge
+
+gui.bookKnowledge.infusion=Pedestal Infusion
+gui.bookKnowledge.crafting=Crafting
+
+gui.bookKnowledge.pedestal=Pedestals
+
+gui.bookKnowledge.books=Books
+
+# Knowledge Book Descriptions
+#                                     #                       \n                        \n                       \n                       \n                       \n                       \n                       \n                       \n                       #
+gui.bookKnowledge.desc.block_pedestal=`By placing stone in a  \ncup like shape, you can \ncreate a block capable \nof holding one item.   \n(right click to set    \nitem)                  \n\nBy adding an ender   \npearl to the recipe,   \nyou create something
+gui.bookKnowledge.desc.block_pedestal2=capable of transferring\nitems from one pedestal \nto another. All you   \nneed to do is activate \nthe main pedestal...
+gui.bookKnowledge.desc.book_craft=`````By infusing crafting   \ntables and iron into a  \nbook, you can craft    \nwherever you are!      \n\nSimply right click to\nopen it up.
+gui.bookKnowledge.desc.book_star=``````The nether star is very\npowerful so why not     \ninfuse it into a book? \n\nThe book wouldn't do \nanything on its own,   \nbut it would have the  \npower to do almost     \nanything...
+gui.bookKnowledge.desc.activation_rod=`However such powerful  \nitems will need more    \npowerful tools of which\nto infuse, so the      \nactivation stick will  \nneed to be upgraded    \nwith a blaze rod.
+gui.bookKnowledge.desc.book_growth=````By focusing the power  \nthe power of nether     \nstars with various     \nnatural items, you can \nrapidly grow plants.

@@ -6,6 +6,6 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public class ModTileEntities {
     public static void init() {
-        GameRegistry.registerTileEntity(TileEntityPedestal.class, Names.TileEnitities.PEDESTAL);
+        GameRegistry.registerTileEntity(TileEntityPedestal.class, Names.TileEntities.PEDESTAL);
     }
 }

@@ -1,5 +1,7 @@
 package com.mrbbot.magicalbooks;
 
+import com.mrbbot.magicalbooks.achievement.ModAchievements;
+import com.mrbbot.magicalbooks.handler.EventHandler;
 import com.mrbbot.magicalbooks.handler.GUIHandler;
 import com.mrbbot.magicalbooks.init.*;
 import com.mrbbot.magicalbooks.proxy.IProxy;
@@ -7,6 +9,7 @@ import com.mrbbot.magicalbooks.reference.Reference;
 import com.mrbbot.magicalbooks.utility.LogHelper;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
+import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
@@ -38,11 +41,15 @@ public class MagicalBooks {
 
         NetworkRegistry.INSTANCE.registerGuiHandler(this, new GUIHandler());
 
+        FMLCommonHandler.instance().bus().register(new EventHandler());
+
         LogHelper.info("Pre-Initialization Complete!");
     }
 
     @Mod.EventHandler
     public void init(FMLInitializationEvent event) {
+        ModAchievements.init();
+
         proxy.registerRenderers();
 
         ModTileEntities.init();

@@ -55,7 +55,7 @@ public class BlockPedestal extends Block implements ITileEntityProvider {
             TileEntityPedestal tileEntityPedestal = (TileEntityPedestal)worldIn.getTileEntity(pos);
             if (tileEntityPedestal != null) {
                 ItemStack stack = playerIn.getHeldItem();
-                if(stack != null && stack.getItem().equals(ModItems.itemActivationStick)) {
+                if(stack != null && stack.getItem().equals(ModItems.itemActivationRod)) {
 
                     //LogHelper.info("XP: " + playerIn.experienceLevel);
                     //playerIn.addExperienceLevel(-1);
