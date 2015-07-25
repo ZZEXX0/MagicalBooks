@@ -1,6 +1,7 @@
 package com.mrbbot.magicalbooks;
 
 import com.mrbbot.magicalbooks.achievement.ModAchievements;
+import com.mrbbot.magicalbooks.command.CommandMagicalBooks;
 import com.mrbbot.magicalbooks.handler.EventHandler;
 import com.mrbbot.magicalbooks.handler.GUIHandler;
 import com.mrbbot.magicalbooks.init.*;
@@ -15,6 +16,7 @@ import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 
 @Mod(modid = Reference.MOD_ID, name = Reference.MOD_NAME, version = Reference.VERSION)
@@ -62,6 +64,12 @@ public class MagicalBooks {
     @Mod.EventHandler
     public void postInit(FMLPostInitializationEvent event) {
         LogHelper.info("Post-Initialization Complete!");
+    }
+
+    @Mod.EventHandler
+    public void serverLoad(FMLServerStartingEvent event)
+    {
+        event.registerServerCommand(new CommandMagicalBooks());
     }
 
 }
