@@ -25,13 +25,12 @@ public class Updater implements Runnable {
             String[] latestVersion = getLatestVersion().split("-");
             String[] thisVersion = Reference.VERSION.split("-");
             if(!latestVersion[0].equals(thisVersion[0])) {
-                sender.addChatMessage(new ChatComponentText(EnumChatFormatting.YELLOW + "Your version of Minecraft is different to the latest version!"));
-                sender.addChatMessage(new ChatComponentText(EnumChatFormatting.YELLOW + "Latest MC Version: " + latestVersion[0] + " Your MC Version: " + thisVersion[0]));
+                sender.addChatMessage(new ChatComponentText(EnumChatFormatting.RED + "You're not using the latest version of Magical Books!"));
+                sender.addChatMessage(new ChatComponentText(EnumChatFormatting.RED + "Latest Version: " + latestVersion[0] + "-" + latestVersion[1] + " Your Version: " + thisVersion[0] + "-" + thisVersion[1]));
                 return;
             }
             if(latestVersion[1].equals(thisVersion[1])) {
                 sender.addChatMessage(new ChatComponentText(EnumChatFormatting.DARK_GREEN + "You're using the latest version of Magical Books!"));
-                sender.addChatMessage(new ChatComponentText(EnumChatFormatting.DARK_GREEN + "Latest Version: " + latestVersion[0] + "-" + latestVersion[1] + " Your Version: " + thisVersion[0] + "-" + thisVersion[1]));
             } else {
                 sender.addChatMessage(new ChatComponentText(EnumChatFormatting.RED + "You're not using the latest version of Magical Books!"));
                 sender.addChatMessage(new ChatComponentText(EnumChatFormatting.RED + "Latest Version: " + latestVersion[0] + "-" + latestVersion[1] + " Your Version: " + thisVersion[0] + "-" + thisVersion[1]));
@@ -75,11 +74,20 @@ public class Updater implements Runnable {
                     downloadVersion(latestVersion[0] + "-" + latestVersion[1]);
                     sender.addChatMessage(new ChatComponentText(EnumChatFormatting.DARK_GREEN + "Downloaded latest version!"));
                     sender.addChatMessage(new ChatComponentText(EnumChatFormatting.DARK_GREEN + "Update successful! Restart to apply changes."));
+                } else {
+                    sender.addChatMessage(new ChatComponentText(EnumChatFormatting.YELLOW + "Run \"/mbs update\" to update!"));
                 }
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public static void update(ICommandSender sender, boolean onlyCheck, String side) {
+        sender.addChatMessage(new ChatComponentText("Checking for update on " + side + "..."));
+        Thread updateThread = new Thread(new Updater(sender, onlyCheck));
+        updateThread.setName("MagicalBooks update thread");
+        updateThread.start();
     }
 
     public File getMagicalBooksJar() {

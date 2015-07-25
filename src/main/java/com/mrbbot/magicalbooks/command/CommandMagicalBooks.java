@@ -1,9 +1,14 @@
 package com.mrbbot.magicalbooks.command;
 
+import com.mrbbot.magicalbooks.MagicalBooks;
 import com.mrbbot.magicalbooks.Updater;
+import com.mrbbot.magicalbooks.utility.LogHelper;
+import net.minecraft.client.Minecraft;
 import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommand;
 import net.minecraft.command.ICommandSender;
+import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.EnumChatFormatting;
@@ -43,10 +48,7 @@ public class CommandMagicalBooks implements ICommand {
         if(args[0].equals("update")) {
             boolean onlyCheck = false;
             if(args.length > 1) onlyCheck = args[1].equals("check");
-            sender.addChatMessage(new ChatComponentText("Checking for update..."));
-            Thread updateThread = new Thread(new Updater(sender, onlyCheck));
-            updateThread.setName("MagicalBooks update thread");
-            updateThread.start();
+            MagicalBooks.proxy.runUpdateThread(sender, onlyCheck);
         }
     }
 

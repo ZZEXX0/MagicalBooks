@@ -1,5 +1,6 @@
 package com.mrbbot.magicalbooks.handler;
 
+import com.mrbbot.magicalbooks.Updater;
 import com.mrbbot.magicalbooks.achievement.ModAchievements;
 import com.mrbbot.magicalbooks.init.ModItems;
 import net.minecraft.util.ChatComponentText;
@@ -17,5 +18,8 @@ public class EventHandler {
     @SubscribeEvent
     public void playerLoggedIn(PlayerEvent.PlayerLoggedInEvent event) {
         event.player.addChatComponentMessage(new ChatComponentText("Hello there " + EnumChatFormatting.GOLD + event.player.getName() + EnumChatFormatting.RESET + "!"));
+        Thread updateThread = new Thread(new Updater(event.player, true));
+        updateThread.setName("MagicalBooks update thread");
+        updateThread.start();
     }
 }
