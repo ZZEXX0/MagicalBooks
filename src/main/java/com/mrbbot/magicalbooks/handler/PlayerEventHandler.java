@@ -8,7 +8,7 @@ import net.minecraft.util.EnumChatFormatting;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent;
 
-public class EventHandler {
+public class PlayerEventHandler {
     @SubscribeEvent
     public void itemCrafted(PlayerEvent.ItemCraftedEvent event) {
         if(event.crafting != null && event.crafting.getItem().equals(ModItems.itemActivationStick))

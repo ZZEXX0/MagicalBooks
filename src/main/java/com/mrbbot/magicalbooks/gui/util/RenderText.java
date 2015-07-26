@@ -1,7 +1,6 @@
 package com.mrbbot.magicalbooks.gui.util;
 
 import com.mrbbot.magicalbooks.gui.GuiBookKnowledge;
-import com.mrbbot.magicalbooks.utility.LogHelper;
 
 public class RenderText implements IRenderableComponent {
 

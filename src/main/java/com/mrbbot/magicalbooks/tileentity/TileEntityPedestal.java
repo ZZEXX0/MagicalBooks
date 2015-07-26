@@ -9,22 +9,13 @@ import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 
 public class TileEntityPedestal extends TileEntity {
-    public float rotValue = 0f;
+    public float rotation = 0f;
+    public boolean autoRotate = true;
 
     private ItemStack itemStack;
 
     public TileEntityPedestal() {
         super();
-    }
-
-    public ItemStack getItemStack() {
-        return itemStack;
-    }
-
-    public void setItemStack(ItemStack itemStack) {
-        worldObj.markBlockForUpdate(pos);
-        markDirty();
-        this.itemStack = itemStack;
     }
 
     @Override
@@ -61,6 +52,16 @@ public class TileEntityPedestal extends TileEntity {
     @Override
     public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity pkt) {
         readSyncableDataFromNBT(pkt.getNbtCompound());
+    }
+
+    public ItemStack getItemStack() {
+        return itemStack;
+    }
+
+    public void setItemStack(ItemStack itemStack) {
+        worldObj.markBlockForUpdate(pos);
+        markDirty();
+        this.itemStack = itemStack;
     }
 
     public void dropItemStack() {

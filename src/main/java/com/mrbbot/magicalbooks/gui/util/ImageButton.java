@@ -1,7 +1,6 @@
 package com.mrbbot.magicalbooks.gui.util;
 
 import com.mrbbot.magicalbooks.reference.Textures;
-import com.mrbbot.magicalbooks.utility.LogHelper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 

@@ -2,7 +2,6 @@ package com.mrbbot.magicalbooks.proxy;
 
 import com.mrbbot.magicalbooks.Updater;
 import net.minecraft.command.ICommandSender;
-import net.minecraft.util.ChatComponentText;
 
 public class ServerProxy extends CommonProxy {
     @Override

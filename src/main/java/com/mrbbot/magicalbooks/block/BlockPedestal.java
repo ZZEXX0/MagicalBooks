@@ -4,7 +4,6 @@ import com.mrbbot.magicalbooks.MagicalBooks;
 import com.mrbbot.magicalbooks.item.ItemActivationStick;
 import com.mrbbot.magicalbooks.tileentity.TileEntityPedestal;
 import com.mrbbot.magicalbooks.init.InfusionRecipes;
-import com.mrbbot.magicalbooks.init.ModItems;
 import com.mrbbot.magicalbooks.reference.Names;
 import com.mrbbot.magicalbooks.reference.Reference;
 import com.mrbbot.magicalbooks.utility.LogHelper;
@@ -19,6 +18,9 @@ import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumWorldBlockLayer;
 import net.minecraft.world.World;
+import org.lwjgl.input.Keyboard;
+
+import java.util.Random;
 
 public class BlockPedestal extends Block implements ITileEntityProvider {
     public BlockPedestal() {
@@ -50,13 +52,11 @@ public class BlockPedestal extends Block implements ITileEntityProvider {
 
     @Override
     public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumFacing side, float hitX, float hitY, float hitZ) {
-        if (worldIn.isRemote) {
-            return true;
-        } else {
-            TileEntityPedestal tileEntityPedestal = (TileEntityPedestal)worldIn.getTileEntity(pos);
+        if(!worldIn.isRemote) {
+            TileEntityPedestal tileEntityPedestal = (TileEntityPedestal) worldIn.getTileEntity(pos);
             if (tileEntityPedestal != null) {
                 ItemStack stack = playerIn.getHeldItem();
-                if(stack != null && stack.getItem() instanceof ItemActivationStick) {
+                if (stack != null && stack.getItem() instanceof ItemActivationStick) {
 
                     //LogHelper.info("XP: " + playerIn.experienceLevel);
                     //playerIn.addExperienceLevel(-1);
@@ -64,17 +64,15 @@ public class BlockPedestal extends Block implements ITileEntityProvider {
                     //playerIn.attackEntityFrom(DamageSource.magic, 2f); //1 heart
 
                     //playerIn.setHealth(playerIn.getHealth() - 1f);
-
-
                     TileEntityPedestal pedestal = (TileEntityPedestal) worldIn.getTileEntity(pos);
                     InfusionRecipes.infuse(pedestal, stack);
                     return true;
                 }
-                if(tileEntityPedestal.getItemStack() != null) {
+                if (tileEntityPedestal.getItemStack() != null) {
                     LogHelper.info("Removing item from pedestal...");
                     tileEntityPedestal.dropItemStack();
                 }
-                if(stack != null) {
+                if (stack != null) {
                     LogHelper.info("Setting item for pedestal at " + pos + " ...");
                     ItemStack oneItem = new ItemStack(stack.getItem());
                     oneItem.setItemDamage(stack.getItemDamage());
@@ -87,6 +85,7 @@ public class BlockPedestal extends Block implements ITileEntityProvider {
             }
             return true;
         }
+        return true;
     }
 
     @Override

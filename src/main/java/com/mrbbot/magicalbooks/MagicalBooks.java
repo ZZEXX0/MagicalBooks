@@ -1,10 +1,13 @@
 package com.mrbbot.magicalbooks;
 
 import com.mrbbot.magicalbooks.achievement.ModAchievements;
-import com.mrbbot.magicalbooks.command.CommandMagicalBooks;
-import com.mrbbot.magicalbooks.handler.EventHandler;
 import com.mrbbot.magicalbooks.handler.GUIHandler;
-import com.mrbbot.magicalbooks.init.*;
+import com.mrbbot.magicalbooks.command.CommandMagicalBooks;
+import com.mrbbot.magicalbooks.handler.PlayerEventHandler;
+import com.mrbbot.magicalbooks.init.ModBlocks;
+import com.mrbbot.magicalbooks.init.ModItems;
+import com.mrbbot.magicalbooks.init.ModTileEntities;
+import com.mrbbot.magicalbooks.init.Recipes;
 import com.mrbbot.magicalbooks.proxy.IProxy;
 import com.mrbbot.magicalbooks.reference.Reference;
 import com.mrbbot.magicalbooks.utility.LogHelper;
@@ -43,7 +46,7 @@ public class MagicalBooks {
 
         NetworkRegistry.INSTANCE.registerGuiHandler(this, new GUIHandler());
 
-        FMLCommonHandler.instance().bus().register(new EventHandler());
+        FMLCommonHandler.instance().bus().register(new PlayerEventHandler());
 
         LogHelper.info("Pre-Initialization Complete!");
     }

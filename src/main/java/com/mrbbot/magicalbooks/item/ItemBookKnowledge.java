@@ -9,7 +9,7 @@ import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
 
-public class ItemBookKnowledge extends ItemMagicalBooks {
+public class ItemBookKnowledge extends ItemMagicalBook {
     public ItemBookKnowledge() {
         super();
         setUnlocalizedName(Names.Items.BOOK_KNOWLEDGE);

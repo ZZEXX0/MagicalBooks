@@ -3,7 +3,6 @@ package com.mrbbot.magicalbooks.reference;
 public final class Names {
     public static final class Items {
         public static final String BOOK_GROWTH = "book_growth";
-        public static final String BOOK_JUMP = "book_jump";
         public static final String ACTIVATION_ROD = "activation_rod";
         public static final String BOOK_CRAFT = "book_craft";
         public static final String BOOK_NETHER_STAR = "book_star";

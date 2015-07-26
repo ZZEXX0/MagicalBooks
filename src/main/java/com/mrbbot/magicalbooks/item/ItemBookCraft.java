@@ -4,12 +4,10 @@ import com.mrbbot.magicalbooks.MagicalBooks;
 import com.mrbbot.magicalbooks.reference.GuiIds;
 import com.mrbbot.magicalbooks.reference.Names;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
-import scala.Int;
 
-public class ItemBookCraft extends ItemMagicalBooks {
+public class ItemBookCraft extends ItemMagicalBook {
     public ItemBookCraft() {
         super();
         setUnlocalizedName(Names.Items.BOOK_CRAFT);

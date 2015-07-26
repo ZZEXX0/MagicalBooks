@@ -12,7 +12,7 @@ import net.minecraft.world.World;
 
 import java.util.Random;
 
-public class ItemBookGrowth extends ItemMagicalBooks {
+public class ItemBookGrowth extends ItemMagicalBook {
 	public ItemBookGrowth() {
 		super();
         setUnlocalizedName(Names.Items.BOOK_GROWTH);

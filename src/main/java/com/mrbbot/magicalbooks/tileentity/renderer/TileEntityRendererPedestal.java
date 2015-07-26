@@ -1,7 +1,9 @@
 package com.mrbbot.magicalbooks.tileentity.renderer;
 
+import com.mrbbot.magicalbooks.item.ItemMagicalBook;
 import com.mrbbot.magicalbooks.tileentity.TileEntityPedestal;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.tileentity.TileEntity;
@@ -21,15 +23,20 @@ public class TileEntityRendererPedestal extends TileEntitySpecialRenderer {
         if(pedestal.getItemStack() != null) {
             GL11.glPushMatrix();
             GL11.glTranslated(x + 0.5, y + 0.9, z + 0.5);
-            GL11.glRotatef(pedestal.rotValue, 0, 1, 0);
+            GL11.glRotatef(pedestal.rotation, 0, 1, 0);
 
-            pedestal.rotValue += 0.5f;
+            if(pedestal.autoRotate)
+                pedestal.rotation += 0.5f;
 
             entityItem.hoverStart = 0.0f;
             entityItem.setEntityItemStack(pedestal.getItemStack());
 
-
-            Minecraft.getMinecraft().getRenderManager().renderEntityWithPosYaw(entityItem, 0, 0, 0, 0, 0);
+            float offsetY = 0;
+            if(pedestal.getItemStack().getItem() != null && pedestal.getItemStack().getItem() instanceof ItemMagicalBook) {
+                GlStateManager.scale(2, 2, 2);
+                offsetY = -0.2f;
+            }
+            Minecraft.getMinecraft().getRenderManager().renderEntityWithPosYaw(entityItem, 0, offsetY, 0, 0, 0);
 
             GL11.glPopMatrix();
         }
