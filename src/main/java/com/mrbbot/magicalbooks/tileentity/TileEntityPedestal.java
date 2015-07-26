@@ -10,7 +10,6 @@ import net.minecraft.tileentity.TileEntity;
 
 public class TileEntityPedestal extends TileEntity {
     public float rotation = 0f;
-    public boolean autoRotate = true;
 
     private ItemStack itemStack;
 
@@ -35,11 +34,13 @@ public class TileEntityPedestal extends TileEntity {
         if(itemStack != null)
             itemStack.writeToNBT(itemData);
         data.setTag("Item", itemData);
+        data.setFloat("Rotation", rotation);
     }
 
     public void readSyncableDataFromNBT(NBTTagCompound data) {
         NBTTagCompound itemData = data.getCompoundTag("Item");
         itemStack = ItemStack.loadItemStackFromNBT(itemData);
+        rotation = data.getFloat("Rotation");
     }
 
     @Override
@@ -59,9 +60,13 @@ public class TileEntityPedestal extends TileEntity {
     }
 
     public void setItemStack(ItemStack itemStack) {
+        markForUpdate();
+        this.itemStack = itemStack;
+    }
+
+    public void markForUpdate() {
         worldObj.markBlockForUpdate(pos);
         markDirty();
-        this.itemStack = itemStack;
     }
 
     public void dropItemStack() {

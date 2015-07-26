@@ -1,32 +1,26 @@
 package com.mrbbot.magicalbooks.block;
 
-import com.mrbbot.magicalbooks.MagicalBooks;
-import com.mrbbot.magicalbooks.item.ItemActivationStick;
-import com.mrbbot.magicalbooks.tileentity.TileEntityPedestal;
 import com.mrbbot.magicalbooks.init.InfusionRecipes;
+import com.mrbbot.magicalbooks.item.ItemActivationStick;
 import com.mrbbot.magicalbooks.reference.Names;
-import com.mrbbot.magicalbooks.reference.Reference;
+import com.mrbbot.magicalbooks.tileentity.TileEntityPedestal;
 import com.mrbbot.magicalbooks.utility.LogHelper;
-import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
-import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockPos;
+import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumWorldBlockLayer;
 import net.minecraft.world.World;
 import org.lwjgl.input.Keyboard;
 
-import java.util.Random;
-
-public class BlockPedestal extends Block implements ITileEntityProvider {
+public class BlockPedestal extends BlockMagicalBooks implements ITileEntityProvider {
     public BlockPedestal() {
-        super(Material.rock);
+        super();
         this.setUnlocalizedName(Names.Blocks.PEDESTAL);
-        this.setCreativeTab(MagicalBooks.tabMagicalBooks);
     }
 
     @Override
@@ -54,7 +48,12 @@ public class BlockPedestal extends Block implements ITileEntityProvider {
     public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumFacing side, float hitX, float hitY, float hitZ) {
         if(!worldIn.isRemote) {
             TileEntityPedestal tileEntityPedestal = (TileEntityPedestal) worldIn.getTileEntity(pos);
-            if (tileEntityPedestal != null) {
+            if(playerIn.isSneaking()) {
+                tileEntityPedestal.rotation = round(tileEntityPedestal.rotation + 1, 45);
+                tileEntityPedestal.rotation -= Math.floor(tileEntityPedestal.rotation / 360) * 360;
+                playerIn.addChatMessage(new ChatComponentText("Pedestal item rotation set to " + (int)tileEntityPedestal.rotation + " degrees."));
+                tileEntityPedestal.markForUpdate();
+            } else if (tileEntityPedestal != null) {
                 ItemStack stack = playerIn.getHeldItem();
                 if (stack != null && stack.getItem() instanceof ItemActivationStick) {
 
@@ -88,20 +87,13 @@ public class BlockPedestal extends Block implements ITileEntityProvider {
         return true;
     }
 
+    private float round(float i, int v){
+        return (float) (Math.ceil(i / v) * v);
+    }
+
     @Override
     public void breakBlock(World world, BlockPos pos, IBlockState blockState) {
         TileEntityPedestal pedestal = (TileEntityPedestal)world.getTileEntity(pos);
         pedestal.dropItemStack();
-    }
-
-    @Override
-    public String getUnlocalizedName()
-    {
-        return String.format("tile.%s%s", Reference.MOD_ID.toLowerCase() + ":", getUnwrappedUnlocalizedName(super.getUnlocalizedName()));
-    }
-
-    protected String getUnwrappedUnlocalizedName(String unlocalizedName)
-    {
-        return unlocalizedName.substring(unlocalizedName.indexOf(".") + 1);
     }
 }

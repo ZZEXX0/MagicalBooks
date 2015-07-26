@@ -17,14 +17,9 @@ public class ItemBookKnowledge extends ItemMagicalBook {
     }
 
     @Override
-    public boolean onItemUse(ItemStack stack, EntityPlayer playerIn, World worldIn, BlockPos pos, EnumFacing side, float hitX, float hitY, float hitZ) {
-        onItemRightClick(stack, worldIn, playerIn);
-        return true;
-    }
-
-    @Override
     public ItemStack onItemRightClick(ItemStack itemStack, World world, EntityPlayer player) {
-        player.openGui(MagicalBooks.instance, GuiIds.BOOK_KNOWLEDGE, world, (int)player.posX, (int)player.posY, (int)player.posZ);
+        if(!player.isSneaking())
+            player.openGui(MagicalBooks.instance, GuiIds.BOOK_KNOWLEDGE, world, (int)player.posX, (int)player.posY, (int)player.posZ);
         return itemStack;
     }
 }

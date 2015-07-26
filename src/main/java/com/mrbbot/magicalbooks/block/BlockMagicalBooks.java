@@ -17,13 +17,6 @@ public class BlockMagicalBooks extends Block {
         this(Material.rock);
     }
 
-    /*@Override
-    @SideOnly(Side.CLIENT)
-    public void registerBlockIcons(IIconRegister iconRegister)
-    {
-        blockIcon = iconRegister.registerIcon(String.format("%s", getUnwrappedUnlocalizedName(this.getUnlocalizedName())));
-    }*/
-
     @Override
     public String getUnlocalizedName()
     {

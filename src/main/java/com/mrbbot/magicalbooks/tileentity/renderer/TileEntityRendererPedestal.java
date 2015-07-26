@@ -25,9 +25,6 @@ public class TileEntityRendererPedestal extends TileEntitySpecialRenderer {
             GL11.glTranslated(x + 0.5, y + 0.9, z + 0.5);
             GL11.glRotatef(pedestal.rotation, 0, 1, 0);
 
-            if(pedestal.autoRotate)
-                pedestal.rotation += 0.5f;
-
             entityItem.hoverStart = 0.0f;
             entityItem.setEntityItemStack(pedestal.getItemStack());
 
