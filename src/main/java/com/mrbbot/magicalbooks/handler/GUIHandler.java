@@ -1,9 +1,12 @@
 package com.mrbbot.magicalbooks.handler;
 
+import com.mrbbot.magicalbooks.gui.GuiBookChest;
 import com.mrbbot.magicalbooks.gui.GuiBookCrafting;
 import com.mrbbot.magicalbooks.gui.GuiBookKnowledge;
+import com.mrbbot.magicalbooks.inventory.ContainerBookChest;
 import com.mrbbot.magicalbooks.inventory.ContainerBookCrafting;
 import com.mrbbot.magicalbooks.inventory.ContainerBookKnowledge;
+import com.mrbbot.magicalbooks.inventory.InventoryBookChest;
 import com.mrbbot.magicalbooks.reference.GuiIds;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.BlockPos;
@@ -18,6 +21,8 @@ public class GUIHandler implements IGuiHandler {
                 return new ContainerBookCrafting(player.inventory, world, new BlockPos(x, y, z));
             case GuiIds.BOOK_KNOWLEDGE:
                 return new ContainerBookKnowledge(player.inventory, world, x, y, z);
+            case GuiIds.BOOK_STORAGE:
+                return new ContainerBookChest(new InventoryBookChest(player), player);
         }
         return null;
     }
@@ -29,6 +34,8 @@ public class GUIHandler implements IGuiHandler {
                 return new GuiBookCrafting(player, world, x, y, z);
             case GuiIds.BOOK_KNOWLEDGE:
                 return new GuiBookKnowledge(player, world, x, y, z);
+            case GuiIds.BOOK_STORAGE:
+                return new GuiBookChest(player, world, x, y, z);
         }
         return null;
     }

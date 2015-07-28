@@ -7,6 +7,7 @@ item.magicalbooks:book_jump.name=Book of Leaping
 item.magicalbooks:activation_rod.name=Rod of Activation
 item.magicalbooks:activation_stick.name=Stick of Activation
 item.magicalbooks:book_craft.name=Book of Crafting
+item.magicalbooks:book_chest.name=Book of Storage
 item.magicalbooks:book_star.name=Book of Nether Stars
 item.magicalbooks:book_knowledge.name=Book of Knowledge
 
@@ -15,6 +16,7 @@ tile.magicalbooks:block_pedestal.name=Pedestal
 
 # Books
 container.bookCrafting=Book of Crafting
+container.bookChest=Book of Storage
 
 # Achievements
 achievement.mb_ach_stick=It tingles...

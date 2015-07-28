@@ -7,17 +7,17 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
-public class ItemBookCraft extends ItemMagicalBook {
-    public ItemBookCraft() {
+public class ItemBookChest extends ItemMagicalBook {
+    public ItemBookChest() {
         super();
-        setUnlocalizedName(Names.Items.BOOK_CRAFT);
-        setLore("Portable crafting!");
+        setUnlocalizedName(Names.Items.BOOK_CHEST);
+        setLore("Portable storage!");
         setHasEffect(false);
     }
 
     public ItemStack onItemRightClick(ItemStack itemStack, World world, EntityPlayer entityPlayer) {
         if(!entityPlayer.isSneaking())
-            entityPlayer.openGui(MagicalBooks.instance, GuiIds.BOOK_CRAFTING, entityPlayer.worldObj, (int) entityPlayer.posX, (int) entityPlayer.posY, (int) entityPlayer.posZ);
+            entityPlayer.openGui(MagicalBooks.instance, GuiIds.BOOK_STORAGE, entityPlayer.worldObj, (int) entityPlayer.posX, (int) entityPlayer.posY, (int) entityPlayer.posZ);
         return itemStack;
     }
 }

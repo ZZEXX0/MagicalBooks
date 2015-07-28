@@ -1,5 +1,6 @@
 package com.mrbbot.magicalbooks.tileentity;
 
+import com.mrbbot.magicalbooks.reference.Names;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -33,14 +34,14 @@ public class TileEntityPedestal extends TileEntity {
         NBTTagCompound itemData = new NBTTagCompound();
         if(itemStack != null)
             itemStack.writeToNBT(itemData);
-        data.setTag("Item", itemData);
-        data.setFloat("Rotation", rotation);
+        data.setTag(Names.NBT.PEDESTAL_ITEM, itemData);
+        data.setFloat(Names.NBT.PEDESTAL_ROTATION, rotation);
     }
 
     public void readSyncableDataFromNBT(NBTTagCompound data) {
-        NBTTagCompound itemData = data.getCompoundTag("Item");
+        NBTTagCompound itemData = data.getCompoundTag(Names.NBT.PEDESTAL_ITEM);
         itemStack = ItemStack.loadItemStackFromNBT(itemData);
-        rotation = data.getFloat("Rotation");
+        rotation = data.getFloat(Names.NBT.PEDESTAL_ROTATION);
     }
 
     @Override

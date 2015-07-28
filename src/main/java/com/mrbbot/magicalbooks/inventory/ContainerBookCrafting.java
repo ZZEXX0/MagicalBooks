@@ -18,25 +18,24 @@ public class ContainerBookCrafting extends Container {
     public ContainerBookCrafting(InventoryPlayer player, World world, BlockPos pos) {
         this.worldObj = world;
         this.pos = pos;
-        this.addSlotToContainer(new SlotCrafting(player.player, this.craftMatrix, this.craftResult, 0, 124, 38));
+        this.addSlotToContainer(new SlotCrafting(player.player, this.craftMatrix, this.craftResult, 0, 124, 47));
         int i;
         int j;
 
         for (i = 0; i < 3; ++i) {
             for (j = 0; j < 3; ++j) {
-                LogHelper.info(i);
-                this.addSlotToContainer(new Slot(this.craftMatrix, j + i * 3, 30 + j * 18, 20 + i * 18));
+                this.addSlotToContainer(new Slot(this.craftMatrix, j + i * 3, 30 + j * 18, 29 + i * 18));
             }
         }
 
         for (i = 0; i < 3; ++i) {
             for (j = 0; j < 9; ++j) {
-                this.addSlotToContainer(new Slot(player, j + i * 9 + 9, 8 + j * 18, 94 + i * 18));
+                this.addSlotToContainer(new Slot(player, j + i * 9 + 9, 8 + j * 18, 103 + i * 18));
             }
         }
 
         for (i = 0; i < 9; ++i) {
-            this.addSlotToContainer(new Slot(player, i, 8 + i * 18, 152));
+            this.addSlotToContainer(new Slot(player, i, 8 + i * 18, 161));
         }
 
         this.onCraftMatrixChanged(this.craftMatrix);

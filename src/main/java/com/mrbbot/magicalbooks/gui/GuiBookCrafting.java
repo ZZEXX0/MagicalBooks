@@ -10,15 +10,22 @@ import net.minecraft.world.World;
 import org.lwjgl.opengl.GL11;
 
 public class GuiBookCrafting extends GuiContainer {
-    private int height = 185;
     public GuiBookCrafting(EntityPlayer player, World world, int x, int y, int z) {
         super(new ContainerBookCrafting(player.inventory, world, new BlockPos(x, y, z)));
     }
 
     @Override
+    public void initGui() {
+        xSize = 176;
+        ySize = 185;
+        super.initGui();
+    }
+
+
+    @Override
     protected void drawGuiContainerForegroundLayer(int par1, int par2) {
-        fontRendererObj.drawString("§n" + StatCollector.translateToLocal("container.bookCrafting"), 29, 7, 0);
-        fontRendererObj.drawString(StatCollector.translateToLocal("container.inventory"), 8, height - 102, 4210752);
+        fontRendererObj.drawString("§n" + StatCollector.translateToLocal("container.bookCrafting"), 29, 16, 0);
+        fontRendererObj.drawString(StatCollector.translateToLocal("container.inventory"), 8, 92, 4210752);
     }
 
     @Override
@@ -26,7 +33,7 @@ public class GuiBookCrafting extends GuiContainer {
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         this.mc.getTextureManager().bindTexture(Textures.GUI_BOOK_CRAFTING);
         int var5 = (width - xSize) / 2;
-        int var6 = (super.height - height) / 2;
-        this.drawTexturedModalRect(var5, var6, 0, 0, xSize, height);
+        int var6 = (height - ySize) / 2;
+        this.drawTexturedModalRect(var5, var6, 0, 0, xSize, ySize);
     }
 }
