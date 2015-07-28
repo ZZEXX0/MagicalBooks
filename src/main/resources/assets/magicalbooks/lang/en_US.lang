@@ -13,6 +13,7 @@ item.magicalbooks:book_knowledge.name=Book of Knowledge
 
 # Blocks
 tile.magicalbooks:block_pedestal.name=Pedestal
+tile.magicalbooks:block_burnt_stone.name=Scorched Stone
 
 # Books
 container.bookCrafting=Book of Crafting

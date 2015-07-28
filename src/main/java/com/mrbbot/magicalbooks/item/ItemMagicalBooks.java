@@ -8,6 +8,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import java.util.Collections;
 import java.util.List;
 
 public class ItemMagicalBooks extends Item {
@@ -30,9 +31,8 @@ public class ItemMagicalBooks extends Item {
     }
 
     @Override
-    public void addInformation(ItemStack par1ItemStack, EntityPlayer player, List par2List, boolean par4) {
-        for(String line : lore)
-            par2List.add(line);
+    public void addInformation(ItemStack itemStack, EntityPlayer player, List list, boolean show) {
+        Collections.addAll(list, lore);
     }
 
     @Override

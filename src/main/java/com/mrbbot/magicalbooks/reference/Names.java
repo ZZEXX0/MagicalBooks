@@ -18,6 +18,7 @@ public final class Names {
 
     public static final class Blocks {
         public static final String PEDESTAL = "block_pedestal";
+        public static final String BURNT_STONE = "block_burnt_stone";
     }
 
     public static final class TileEntities {
@@ -25,7 +26,6 @@ public final class Names {
     }
 
     public static final class NBT {
-        public static final String BOOK_OPEN = "BookOpen";
         public static final String PEDESTAL_ITEM = "Item";
         public static final String PEDESTAL_ROTATION = "Rotation";
         public static final String ITEMS = "Items";
